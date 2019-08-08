@@ -1,7 +1,7 @@
 # soundTracer
 soundTracer is a minimalist web-based melody sequencer. 
-    x places trig
-    z removes trig
+x places trig
+z removes trig
     c starts tick
     v removes tick
     s shifts all trigs up
