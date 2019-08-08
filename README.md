@@ -13,5 +13,5 @@ s shifts all trigs up <br/>
 d shifts all trigs down <br/>
 arrows navigate <br/>
 space to begin <br/>
-click anywhere to begin <br/>
-space toggles instructions
+space pauses<br/>
+click anywhere to begin 
