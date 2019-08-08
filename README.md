@@ -9,5 +9,7 @@ d shifts all trigs down <br/>
 arrows navigate <br/>
 space to begin <br/>
 
+Requires the p5.js, p5.sound, & p5.play libraries.
+
 Try it here: https://mattholamieux.itch.io/soundtracer
 
