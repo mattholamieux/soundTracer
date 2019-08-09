@@ -42,7 +42,6 @@ function draw() {
   if (open) {
     openScreen();
   } else {
-    // drawSprites();
     nav();
     sproutTrigs();
     sproutTicks();
