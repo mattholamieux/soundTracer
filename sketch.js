@@ -11,6 +11,7 @@ let notes = ["A2", "B2", "C2", "D2", "E2", "G2", "A3", "B3", "C3", "D3", "E3", "
 let open = true;
 let glow = 0;
 let grow = 1;
+let gain;
 
 function setup() {
   frameRate(64);
@@ -28,10 +29,26 @@ function setup() {
     lines.add(l);
     lines.add(w);
   }
-  reverb = new p5.Reverb();
+  // gain = new Tone.Gain(0.7);
+  compressor = new Tone.Compressor({
+      ratio: 12,
+      threshold: -24,
+      release: 0.25,
+      attack: 0.003,
+      knee: 30
+    });
+    compressor.connect(Tone.Master);
+    reverb = new Tone.Freeverb().connect(compressor);
+    delay = new Tone.PingPongDelay().connect(compressor);
+    delay.wet.value = 0;
+    delay.delayTime.value = 0.25;
+    delay.feedback.value = 0;
+    reverb.wet.value = 0.4;
+    reverb.roomSize.value = 0.4;
+    reverb.dampening.value = 300;
   for (i = 0; i < lines.length; i++) {
-    synths[i] = new p5.MonoSynth();
-    reverb.process(synths[i], 3, 2);
+    synths[i] = new Tone.Synth().chain(delay, reverb);
+    synths[i].oscillator.type = 'sine';
   }
 }
 
@@ -78,7 +95,8 @@ function playSound(a, b) {
   if (frameCount % 8 == 0) {
     for (i = 1; i < lines.length; i++) {
       if (a.position.y == i * scl - scl / 2) {
-        synths[i].play(notes[i - 1], 0.5, 0, 1 / 8);
+        // synths[i].play(notes[i - 1], 0.5, 0, 1 / 8);
+        synths[i].triggerAttackRelease(notes[i-1], '16n');
         b.shapeColor = color(random(255), random(255), random(255));
       }
     }
